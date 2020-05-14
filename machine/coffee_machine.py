@@ -13,9 +13,11 @@ class Coffee:
         self.money = money
         self.requirement = (self.water, self.milk, self.coffee, self.cups, self.money)
 
+
 espresso = Coffee(250, 0, 16, 1, 4)
 latte = Coffee(350, 75, 20, 1, 7)
 cappuccino = Coffee(200, 100, 12, 1, 6)
+
 
 class EspressoMachine:
     available_water = 0
@@ -38,7 +40,6 @@ class EspressoMachine:
     def reduce_availability(self, drink):
         for i in range(4):
             self.availability[i] - drink.requirement[i]
-        return self.availability
 
     def check_availability(self, drink):
         check = []
@@ -116,6 +117,9 @@ class EspressoMachine:
         if self.state == "back":
             self.state = ""
             # return self.state
+
+        if self.state == "exit":
+            return self.state
 
 while True:
     cm = EspressoMachine()
