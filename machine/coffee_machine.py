@@ -7,13 +7,6 @@ class Coffee:
     requirement = ()
 
     def __init__(self, water, milk, coffee, cups, money):
-        """
-        self.water = water
-        self.milk = milk
-        self.coffee = coffee
-        self.cups = cups
-        self.money = money
-        """
         self.requirement = (water,
                             milk,
                             coffee,
@@ -28,13 +21,6 @@ cappuccino = Coffee(200, 100, 12, 1, -6)
 
 
 class EspressoMachine:
-    """
-    available_water = 0
-    available_milk = 0
-    available_coffee = 0
-    available_cups = 0
-    available_money = 0
-    """
     availability = [0,  # available_water
                     0,  # available_milk
                     0,  # available_coffee
@@ -45,18 +31,11 @@ class EspressoMachine:
     state: str = ""
 
     def __init__(self):
-        """
-        self.available_water = 400
-        self.available_milk = 540
-        self.available_coffee = 120
-        self.available_cups = 9
-        self.available_money = 550
-        """
-        self.availability = [400,
-                             540,
-                             120,
-                             9,
-                             550,
+        self.availability = [400,  # self.available_water
+                             540,  # self.available_milk
+                             120,  # self.available_coffee
+                             9,  # self.available_cups
+                             550,  # self.available_money
                              ]
 
     def reduce_availability(self, drink):
@@ -80,7 +59,6 @@ class EspressoMachine:
 
         elif self.state == "buy":
             self.state = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
-            # return self.state
 
         elif self.state == "fill":
             for i, k in zip(range(4), ["Write how many ml of water do you want to add: ",
@@ -88,15 +66,13 @@ class EspressoMachine:
                                        "Write how many grams of coffee beans do you want to add: ",
                                        "Write how many disposable cups of coffee do you want to add: ",
                                        ]):
-                self.availability[i] = int(input(k))
+                self.availability[i] += int(input(k))
             self.state = ""
-            # return self.state
 
         elif self.state == "take":
             print(f"I gave you ${self.availability[4]}")
             self.availability[4] = 0
             self.state = ""
-            # return self.state
 
         elif self.state == "remaining":
             print("The coffee machine has:")
@@ -106,40 +82,38 @@ class EspressoMachine:
                                                 "of disposable cups",
                                                 "of money",
                                                 ]):
-                print(i, k)
+                if "money" in k:
+                    print("$" + str(i), k)
+                else:
+                    print(i, k)
             self.state = ""
-            # return self.state
 
         elif self.state == "1":
             if self.check_availability(espresso):
-                print("I have enough resources, making you an espresso!")
+                print("I have enough resources, making you a coffee!")
                 self.reduce_availability(espresso)
             else:
                 self.unavailable(espresso)
             self.state = ""
-            # return self.state
 
         elif self.state == "2":
             if self.check_availability(latte):
-                print("I have enough resources, making you a latte!")
+                print("I have enough resources, making you a coffee!")
                 self.reduce_availability(latte)
             else:
                 self.unavailable(espresso)
             self.state = ""
-            # return self.state
 
         elif self.state == "3":
             if self.check_availability(cappuccino):
-                print("I have enough resources, making you a cappuccino!")
+                print("I have enough resources, making you a coffee!")
                 self.reduce_availability(cappuccino)
             else:
                 self.unavailable(espresso)
             self.state = ""
-            # return self.state
 
         elif self.state == "back":
             self.state = ""
-            # return self.state
 
         elif self.state == "exit":
             return self.state
